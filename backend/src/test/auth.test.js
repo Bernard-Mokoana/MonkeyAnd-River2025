@@ -1,4 +1,4 @@
-const request = require("supertest");
+import request from "supertest";
 import app from "../app.js"; // your Express app
 import mongoose from "mongoose"; // adjust path
 import { user } from "../model/user.js";

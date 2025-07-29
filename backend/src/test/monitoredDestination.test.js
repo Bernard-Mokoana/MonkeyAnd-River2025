@@ -1,4 +1,4 @@
-const request = require("supertest");
+import request from "supertest";
 import app from "../app.js";
 
 describe("Monitored Destinations CRUD", () => {
