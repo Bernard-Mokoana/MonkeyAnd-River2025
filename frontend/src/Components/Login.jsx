@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { loginUser } from "../service/authService.js";
 
 const Login = ({ onSwitch }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Login with:", { email, password });
-    alert("Login submitted. Check console for data.");
+    try {
+      const user = await loginUser.login({ email, password });
+      console.log("Login with:", user);
+      alert("Login submitted. Check console for data.");
+    } catch (error) {
+      console.error(
+        "Login Failed:",
+        error.response?.data?.message || error.message
+      );
+    }
   };
 
   return (
@@ -28,8 +37,15 @@ const Login = ({ onSwitch }) => {
         required
       />
       <button type="submit">Login</button>
-      <p><a href="#">Forgot Password?</a></p>
-      <p>Not a member? <span onClick={onSwitch} className="link">Sign up</span></p>
+      <p>
+        <a href="#">Forgot Password?</a>
+      </p>
+      <p>
+        Not a member?{" "}
+        <span onClick={onSwitch} className="link">
+          Sign up
+        </span>
+      </p>
     </form>
   );
 };
