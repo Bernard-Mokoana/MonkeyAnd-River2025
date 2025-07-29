@@ -1,19 +1,26 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Signup from './Components/Signup.jsx'
-import Login from './Components/Login.jsx'
-function App() {
+import React, { useState } from 'react';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
+import './App.css';
+import asset1 from './assets/asset1.png';
 
+const App = () => {
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Signup />}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="*" element={<div>404 Not Found</div>}></Route>
-      </Routes>
-    </BrowserRouter>
-  )
-}
+    <div className="container">
+      <div className="left-panel">
+        <img src={asset1} alt="Travel" />
+      </div>
+      <div className="right-panel">
+        {isLogin ? (
+          <Login onSwitch={() => setIsLogin(false)} />
+        ) : (
+          <Signup onSwitch={() => setIsLogin(true)} />
+        )}
+      </div>
+    </div>
+  );
+};
 
-export default App
+export default App;
